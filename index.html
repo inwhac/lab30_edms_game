@@ -1373,195 +1373,100 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
 }
 .info-modal-x:hover { background:rgba(255,255,255,0.35); }
 
-/* ── 팝업 내부 스타일 격리 (scoped) ── */
-
-.pm1 *,.pm1 *::before,.pm1 *::after {.pm1 box-sizing: border-box; margin: 0; padding: 0; }
-  
-  .pm1 {
-.pm1 font-family: 'Pretendard',.pm1 -apple-system,.pm1 sans-serif;
-    background: var(--bg); color: var(--text);
-    min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    padding: 24px;
+/* ── 팝업 내부 공통 다크 테마 변수 ── */
+  .pm1, .pm2, .pm3 {
+    --pk-bg: #0f1117; --pk-surface: #1a1d27; --pk-surface2: #22263a; --pk-surface3: #2a2f45;
+    --pk-border: rgba(255,255,255,0.07); --pk-border2: rgba(255,255,255,0.12);
+    --pk-text: #f0f1f5; --pk-text2: #9da3b8; --pk-text3: #6b7290;
+    --pk-accent: #6c63ff; --pk-accent2: #4facfe; --pk-gold: #f5c842; --pk-green: #3ecf8e;
+    box-sizing: border-box;
   }
-  .popup {
-.pm1 width: 680px; max-width: 100%;
-    background: var(--surface); border-radius: 20px;
-    border: 1px solid var(--border2);
-    box-shadow: 0 32px 80px rgba(0,.pm1 0,.pm1 0,.pm1 .6);
-    display: flex; flex-direction: column;
+  .pm1 *, .pm2 *, .pm3 * { box-sizing: border-box; }
+  .pm1 .popup, .pm2 .popup, .pm3 .popup {
+    width: 100%; background: var(--pk-surface); border-radius: 20px;
+    border: 1px solid var(--pk-border2); display: flex; flex-direction: column;
+    color: var(--pk-text); font-family: 'Pretendard', -apple-system, sans-serif;
   }
-  .popup-head {
-.pm1 padding: 24px 28px 20px; display: flex; align-items: center;
-    gap: 12px; border-bottom: 1px solid var(--border);
+  .pm1 .popup-head, .pm2 .popup-head, .pm3 .popup-head {
+    padding: 24px 28px 20px; display: flex; align-items: center;
+    gap: 12px; border-bottom: 1px solid var(--pk-border);
   }
-  .popup-icon {.pm1 width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
-  .popup-head h2 {.pm1 font-size: 17px; font-weight: 700; }
-  .popup-head p {.pm1 font-size: 12px; color: var(--text3); margin-top: 2px; }
-  .popup-.pm1 {.pm1 padding: 24px 28px; }
-
-  .mission-cards {.pm1 display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .mission-card {
-.pm1 background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 14px; padding: 18px 18px 16px;
+  .pm1 .popup-icon, .pm2 .popup-icon, .pm3 .popup-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;
   }
-  .mc-top {.pm1 display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-  .mc-icon {.pm1 font-size: 22px; }
-  .mc-name {.pm1 font-size: 14px; font-weight: 700; }
-  .mc-rows {.pm1 display: flex; flex-direction: column; gap: 6px; }
-  .mc-row {.pm1 display: flex; justify-content: space-between; align-items: center; }
-  .mc-label {.pm1 font-size: 11px; color: var(--text3); }
-  .mc-val {.pm1 font-size: 12px; font-weight: 600; color: var(--text2); text-align: right; }
-  .mc-divider {.pm1 height: 1px; background: var(--border); margin: 8px 0; }
-  .mc-reward {
-.pm1 display: flex; align-items: center;
-    background: rgba(108,.pm1 99,.pm1 255,.pm1 .1); border-radius: 8px; padding: 6px 10px; margin-top: 10px;
-  }
-  .mc-reward span {.pm1 font-size: 11px; color: #a9a3ff; font-weight: 600; }
-  .mc-condition {
-.pm1 background: var(--surface3); border-radius: 8px; padding: 6px 10px;
-    margin-top: 8px; font-size: 11px; color: var(--text3); line-height: 1.5;
-  }
-  @media (max-width: 600px) {.pm1 .mission-cards { grid-template-columns: 1fr; } }
-
-
-.pm2 *,.pm2 *::before,.pm2 *::after {.pm2 box-sizing: border-box; margin: 0; padding: 0; }
-  
-  .pm2 {
-.pm2 font-family: 'Pretendard',.pm2 -apple-system,.pm2 sans-serif;
-    background: var(--bg); color: var(--text);
-    min-height: 100vh; display: flex; align-items: flex-start; justify-content: center;
-    padding: 24px;
-  }
-  .popup {
-.pm2 width: 680px; max-width: 100%;
-    background: var(--surface); border-radius: 20px;
-    border: 1px solid var(--border2);
-    box-shadow: 0 32px 80px rgba(0,.pm2 0,.pm2 0,.pm2 .6);
-    display: flex; flex-direction: column;
-  }
-  .popup-head {
-.pm2 padding: 24px 28px 20px; display: flex; align-items: center;
-    gap: 12px; border-bottom: 1px solid var(--border);
-  }
-  .popup-icon {.pm2 width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
-  .popup-head h2 {.pm2 font-size: 17px; font-weight: 700; }
-  .popup-head p {.pm2 font-size: 12px; color: var(--text3); margin-top: 2px; }
-  .popup-.pm2 {.pm2 padding: 24px 28px; }
-
-  .badge-note {
-.pm2 background: var(--surface3); color: var(--text2); font-size: 12px;
-    padding: 10px 14px; border-radius: 10px; line-height: 1.6;
-  }
-  .tab-row {.pm2 display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
-  .tab-btn {
-.pm2 padding: 7px 14px; border-radius: 8px; border: 1.5px solid var(--border);
-    background: transparent; color: var(--text3); font-family: inherit;
-    font-size: 12px; font-weight: 600; cursor: pointer; transition: all .18s;
-  }
-  .tab-btn:hover {.pm2 background: var(--surface2); color: var(--text); }
-  .tab-btn.active {.pm2 background: var(--accent); border-color: var(--accent); color: #fff; }
-  .tab-panel {.pm2 display: none; }
-  .tab-panel.active {.pm2 display: block; }
-
-  .section-label {
-.pm2 font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--text3); margin: 16px 0 8px;
-  }
-  .section-label:first-child {.pm2 margin-top: 0; }
-  .act-list {.pm2 display: flex; flex-direction: column; gap: 4px; }
-  .act-item {
-.pm2 display: flex; align-items: center; background: var(--surface2);
-    border-radius: 8px; padding: 8px 12px; gap: 10px;
-  }
-  .act-lv {
-.pm2 width: 24px; height: 24px; border-radius: 6px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 10px; font-weight: 700; flex-shrink: 0;
-  }
-  .lv1 {.pm2 background: rgba(157,.pm2 163,.pm2 184,.pm2 .15); color: #9da3b8; }
-  .lv2 {.pm2 background: rgba(79,.pm2 172,.pm2 254,.pm2 .15); color: var(--accent2); }
-  .lv3 {.pm2 background: rgba(62,.pm2 207,.pm2 142,.pm2 .15); color: var(--green); }
-  .act-name {.pm2 font-size: 12px; flex: 1; }
-  .act-xp {.pm2 font-size: 11px; font-weight: 700; color: var(--gold); }
-  .act-limit {.pm2 font-size: 11px; color: var(--text3); }
-
-  .badge-list-grid {.pm2 display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 10px; }
-  .badge-list-item {
-.pm2 display: flex; align-items: center; gap: 8px;
-    background: var(--surface2); border-radius: 8px; padding: 8px 12px;
-  }
-  .badge-num {
-.pm2 width: 20px; height: 20px; border-radius: 5px;
-    background: var(--surface3); color: var(--text3);
-    font-size: 10px; font-weight: 700;
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .badge-list-name {.pm2 font-size: 12px; font-weight: 600; flex: 1; }
-  .badge-list-step {.pm2 font-size: 10px; color: var(--text3); white-space: nowrap; }
-  .badge-onboard-item {
-.pm2 display: flex; align-items: center; gap: 10px;
-    background: linear-gradient(135deg,.pm2 rgba(245,.pm2 200,.pm2 66,.pm2 .1),.pm2 rgba(245,.pm2 200,.pm2 66,.pm2 .04));
-    border: 1px solid rgba(245,.pm2 200,.pm2 66,.pm2 .2);
-    border-radius: 8px; padding: 8px 12px; margin-bottom: 8px;
-  }
-  .badge-onboard-item .badge-list-name { color: #f5c842; }
-
-
-.pm3 *,.pm3 *::before,.pm3 *::after {.pm3 box-sizing: border-box; margin: 0; padding: 0; }
-  
-  .pm3 {
-.pm3 font-family: 'Pretendard',.pm3 -apple-system,.pm3 sans-serif;
-    background: var(--bg); color: var(--text);
-    min-height: 100vh; display: flex; align-items: flex-start; justify-content: center;
-    padding: 24px;
-  }
-  .popup {
-.pm3 width: 680px; max-width: 100%;
-    background: var(--surface); border-radius: 20px;
-    border: 1px solid var(--border2);
-    box-shadow: 0 32px 80px rgba(0,.pm3 0,.pm3 0,.pm3 .6);
-    display: flex; flex-direction: column;
-  }
-  .popup-head {
-.pm3 padding: 24px 28px 20px; display: flex; align-items: center;
-    gap: 12px; border-bottom: 1px solid var(--border);
-  }
-  .popup-icon {.pm3 width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
-  .popup-head h2 {.pm3 font-size: 17px; font-weight: 700; }
-  .popup-head p {.pm3 font-size: 12px; color: var(--text3); margin-top: 2px; }
-  .popup-.pm3 {.pm3 padding: 24px 28px; }
-
-  .section-label {
-.pm3 font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--text3); margin: 16px 0 8px;
-  }
-  .badge-onboard {
-.pm3 display: flex; align-items: center;
-    background: linear-gradient(135deg,.pm3 rgba(245,.pm3 200,.pm3 66,.pm3 .12),.pm3 rgba(245,.pm3 200,.pm3 66,.pm3 .04));
-    border: 1px solid rgba(245,.pm3 200,.pm3 66,.pm3 .25);
-    border-radius: 12px; padding: 14px 16px; gap: 14px; margin-bottom: 20px;
-  }
-  .badge-star-icon {.pm3 font-size: 28px; }
-  .badge-onboard-info h4 {.pm3 font-size: 14px; font-weight: 700; color: var(--gold); }
-  .badge-onboard-info p {.pm3 font-size: 12px; color: var(--text3); margin-top: 2px; }
-
-  .persona-section {.pm3 margin-bottom: 16px; }
-  .persona-head {.pm3 display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-  .persona-emoji {.pm3 font-size: 16px; }
-  .persona-name {.pm3 font-size: 13px; font-weight: 700; }
-  .persona-desc {.pm3 font-size: 11px; color: var(--text3); }
-
-  .badge-steps {.pm3 display: grid; grid-template-columns: repeat(4,.pm3 1fr); gap: 6px; }
-  .badge-step {
-.pm3 background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 10px; padding: 10px 8px; text-align: center; transition: all .2s;
-  }
-  .badge-step:hover {.pm3 border-color: var(--border2); background: var(--surface3); }
-  .step-num {.pm3 font-size: 9px; font-weight: 700; letter-spacing: .06em; color: var(--text3); margin-bottom: 4px; }
-  .step-name {.pm3 font-size: 12px; font-weight: 700; margin-bottom: 6px; }
-  .step-cond {.pm3 font-size: 10px; color: var(--text3); line-height: 1.4; }
-
-  @media (max-width: 600px) {.pm3 .badge-steps { grid-template-columns: repeat(2, 1fr); } }
+  .pm1 .popup-head h2, .pm2 .popup-head h2, .pm3 .popup-head h2 { font-size: 17px; font-weight: 700; margin: 0; }
+  .pm1 .popup-head p, .pm2 .popup-head p, .pm3 .popup-head p { font-size: 12px; color: var(--pk-text3); margin: 2px 0 0; }
+  .pm1 .popup-body, .pm2 .popup-body, .pm3 .popup-body { padding: 24px 28px; overflow-y: auto; max-height: 65vh; }
+  .pm1 .popup-body::-webkit-scrollbar, .pm2 .popup-body::-webkit-scrollbar, .pm3 .popup-body::-webkit-scrollbar { width: 3px; }
+  .pm1 .popup-body::-webkit-scrollbar-thumb, .pm2 .popup-body::-webkit-scrollbar-thumb, .pm3 .popup-body::-webkit-scrollbar-thumb { background: var(--pk-surface3); border-radius: 2px; }
+  /* pm1: 미션 종류 */
+  .pm1 .mission-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .pm1 .mission-card { background: var(--pk-surface2); border: 1px solid var(--pk-border); border-radius: 14px; padding: 18px 18px 16px; }
+  .pm1 .mc-top { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .pm1 .mc-icon { font-size: 22px; }
+  .pm1 .mc-name { font-size: 14px; font-weight: 700; }
+  .pm1 .mc-rows { display: flex; flex-direction: column; gap: 6px; }
+  .pm1 .mc-row { display: flex; justify-content: space-between; align-items: center; }
+  .pm1 .mc-label { font-size: 11px; color: var(--pk-text3); }
+  .pm1 .mc-val { font-size: 12px; font-weight: 600; color: var(--pk-text2); text-align: right; }
+  .pm1 .mc-divider { height: 1px; background: var(--pk-border); margin: 8px 0; }
+  .pm1 .mc-reward { display: flex; align-items: center; background: rgba(108,99,255,.1); border-radius: 8px; padding: 6px 10px; margin-top: 10px; }
+  .pm1 .mc-reward span { font-size: 11px; color: #a9a3ff; font-weight: 600; }
+  .pm1 .mc-condition { background: var(--pk-surface3); border-radius: 8px; padding: 6px 10px; margin-top: 8px; font-size: 11px; color: var(--pk-text3); line-height: 1.5; }
+  /* pm2: 미션별 활동 */
+  .pm2 .badge-note { background: var(--pk-surface3); color: var(--pk-text2); font-size: 12px; padding: 10px 14px; border-radius: 10px; line-height: 1.6; }
+  .pm2 .tab-row { display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
+  .pm2 .tab-btn { padding: 7px 14px; border-radius: 8px; border: 1.5px solid var(--pk-border); background: transparent; color: var(--pk-text3); font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer; transition: all .18s; }
+  .pm2 .tab-btn:hover { background: var(--pk-surface2); color: var(--pk-text); }
+  .pm2 .tab-btn.active { background: var(--pk-accent); border-color: var(--pk-accent); color: #fff; }
+  .pm2 .tab-panel { display: none; }
+  .pm2 .tab-panel.active { display: block; }
+  .pm2 .section-label { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--pk-text3); margin: 16px 0 8px; }
+  .pm2 .section-label:first-child { margin-top: 0; }
+  .pm2 .act-list { display: flex; flex-direction: column; gap: 4px; }
+  .pm2 .act-item { display: flex; align-items: center; background: var(--pk-surface2); border-radius: 8px; padding: 8px 12px; gap: 10px; }
+  .pm2 .act-lv { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
+  .pm2 .lv1 { background: rgba(157,163,184,.15); color: #9da3b8; }
+  .pm2 .lv2 { background: rgba(79,172,254,.15); color: var(--pk-accent2); }
+  .pm2 .lv3 { background: rgba(62,207,142,.15); color: var(--pk-green); }
+  .pm2 .act-name { font-size: 12px; flex: 1; }
+  .pm2 .act-xp { font-size: 11px; font-weight: 700; color: var(--pk-gold); }
+  .pm2 .act-limit { font-size: 11px; color: var(--pk-text3); }
+  .pm2 .badge-list-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 10px; }
+  .pm2 .badge-list-item { display: flex; align-items: center; gap: 8px; background: var(--pk-surface2); border-radius: 8px; padding: 8px 12px; }
+  .pm2 .badge-num { width: 20px; height: 20px; border-radius: 5px; background: var(--pk-surface3); color: var(--pk-text3); font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .pm2 .badge-list-name { font-size: 12px; font-weight: 600; flex: 1; }
+  .pm2 .badge-list-step { font-size: 10px; color: var(--pk-text3); white-space: nowrap; }
+  .pm2 .badge-onboard-item { display: flex; align-items: center; gap: 10px; background: linear-gradient(135deg,rgba(245,200,66,.1),rgba(245,200,66,.04)); border: 1px solid rgba(245,200,66,.2); border-radius: 8px; padding: 8px 12px; margin-bottom: 8px; }
+  .pm2 .badge-onboard-item .badge-list-name { color: #f5c842; }
+  /* pm3: 배지 종류 */
+  .pm3 .section-label { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--pk-text3); margin: 16px 0 8px; }
+  .pm3 .badge-onboard { display: flex; align-items: center; background: linear-gradient(135deg,rgba(245,200,66,.12),rgba(245,200,66,.04)); border: 1px solid rgba(245,200,66,.25); border-radius: 12px; padding: 14px 16px; gap: 14px; margin-bottom: 20px; }
+  .pm3 .badge-star-icon { font-size: 28px; }
+  .pm3 .badge-onboard-info h4 { font-size: 14px; font-weight: 700; color: var(--pk-gold); margin: 0; }
+  .pm3 .badge-onboard-info p { font-size: 12px; color: var(--pk-text3); margin: 2px 0 0; }
+  .pm3 .persona-section { margin-bottom: 16px; }
+  .pm3 .persona-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .pm3 .persona-emoji { font-size: 16px; }
+  .pm3 .persona-name { font-size: 13px; font-weight: 700; }
+  .pm3 .persona-desc { font-size: 11px; color: var(--pk-text3); }
+  .pm3 .badge-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; }
+  .pm3 .badge-step { background: var(--pk-surface2); border: 1px solid var(--pk-border); border-radius: 10px; padding: 10px 8px; text-align: center; transition: all .2s; }
+  .pm3 .badge-step:hover { border-color: var(--pk-border2); background: var(--pk-surface3); }
+  .pm3 .step-num { font-size: 9px; font-weight: 700; letter-spacing: .06em; color: var(--pk-text3); margin-bottom: 4px; }
+  .pm3 .step-name { font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+  .pm3 .step-cond { font-size: 10px; color: var(--pk-text3); line-height: 1.4; }
+  /* 선택된 액티비티 테이블 */
+  .act-cond-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .act-cond-table th { background: #f0f2f5; border: 1px solid #dde1e7; padding: 6px 10px; font-weight: 600; color: #444; text-align: left; white-space: nowrap; }
+  .act-cond-table td { border: 1px solid #e8eaed; padding: 6px 10px; color: #333; vertical-align: middle; }
+  .act-cond-table tr:hover td { background: #f5f8ff; }
+  .act-cond-del { background: none; border: 1px solid #ccc; border-radius: 3px; padding: 2px 8px; font-size: 11px; cursor: pointer; color: #888; font-family: inherit; transition: all .15s; }
+  .act-cond-del:hover { border-color: #e53935; color: #e53935; background: #fff5f5; }
+  .act-filter-input { height: 24px; border: 1px solid #ccc; border-radius: 3px; padding: 0 7px; font-size: 11px; width: 140px; outline: none; }
+  .act-filter-input:focus { border-color: var(--primary); }
+  .act-filter-none { color: #bbb; font-size: 11px; }
 
 </style>
 </head>
@@ -1971,9 +1876,9 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
             <div class="setting-block-body">
               <div class="setting-notice" style="margin-bottom:4px">활동/미션 구성 내용을 팝업으로 확인할 수 있습니다.</div>
               <div class="info-btn-group">
-                <button class="info-btn" onclick="openInfoPopup('미션 종류', 'popup1-mission-types.html')">📋 미션 종류</button>
-                <button class="info-btn" onclick="openInfoPopup('미션별 활동 안내', 'popup2-mission-activities.html')">⚡ 미션별 활동 안내</button>
-                <button class="info-btn" onclick="openInfoPopup('배지 종류', 'popup3-badge-types.html')">🏅 배지 종류</button>
+                <button class="info-btn" onclick="openInfoModal('modal-p1')">📋 미션 종류</button>
+                <button class="info-btn" onclick="openInfoModal('modal-p2')">⚡ 미션별 활동 안내</button>
+                <button class="info-btn" onclick="openInfoModal('modal-p3')">🏅 배지 종류</button>
               </div>
             </div>
           </div>
@@ -2066,7 +1971,7 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
           <div class="setting-block">
             <div class="setting-block-header">⑦ 커스텀 미션 제작</div>
             <div class="setting-block-body">
-
+              <div class="setting-notice" style="margin-bottom:10px">교육담당자가 직접 미션을 생성하고 달성 조건 액티비티를 설정할 수 있습니다. 달성형 미션만 생성 가능합니다.</div>
               <div class="detail-section-header">
                 <span class="detail-section-title" style="font-size:12px;font-weight:600;color:#555">커스텀 미션 목록</span>
                 <button class="btn btn-primary" onclick="openCustomMissionModal()">+ 커스텀 미션 추가</button>
@@ -2466,19 +2371,21 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
       <div class="form-row">
         <label class="form-label">미션 달성 조건 <span class="req">*</span></label>
         <div style="display:flex;align-items:flex-start;gap:8px;">
-          <div class="activity-selected-list" id="selected-activities" style="flex:1;min-height:70px;">
-            <span style="color:#bbb">액티비티를 선택해주세요.</span>
+          <div style="flex:1;">
+            <div id="selected-activities-wrap">
+              <span style="color:#bbb;font-size:12px">액티비티를 선택해주세요.</span>
+            </div>
           </div>
-          <button class="mbtn mbtn-outline" onclick="openActivitySelectModal()" style="white-space:nowrap;height:32px">액티비티 선택</button>
+          <button class="mbtn mbtn-outline" onclick="openActivitySelectModal()" style="white-space:nowrap;height:32px">액티비티 추가</button>
         </div>
-        <div class="form-hint">액티비티 선택 후 필터(채널ID, 프로덕트ID 등) 입력이 필요한 경우 자동으로 입력란이 표시됩니다.</div>
+        <div class="form-hint">필터 입력이 필요한 액티비티는 선택 후 직접 입력할 수 있습니다.</div>
       </div>
       <div class="form-row">
         <label class="form-label">대상자 설정</label>
         <div class="target-option-row">
           <label class="radio-opt"><input type="radio" name="target" value="all" checked onchange="toggleTargetSelect(false)"> 전체 임직원</label>
           <label class="radio-opt"><input type="radio" name="target" value="select" onchange="toggleTargetSelect(true)"> 대상 지정하기</label>
-          <button class="mbtn mbtn-gray" id="btn-select-target" style="display:none" onclick="alert('대상 선택 팝업 연결')">대상 선택</button>
+          <button class="mbtn mbtn-gray" id="btn-select-target" style="display:none" onclick="openTargetSelectModal()">대상 선택</button>
           <span id="selected-target-text" style="font-size:12px;color:var(--primary);display:none"></span>
         </div>
       </div>
@@ -2524,13 +2431,13 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
 <div class="am-modal-ov" id="activity-select-modal">
   <div class="am-modal" style="width:640px">
     <div class="am-modal-header">
-      <span class="am-modal-title">액티비티 선택</span>
+      <span class="am-modal-title">액티비티 추가</span>
       <button class="am-modal-close" onclick="document.getElementById('activity-select-modal').classList.remove('open')">✕</button>
     </div>
     <div class="am-modal-body" style="padding:16px 20px;">
       <div style="font-size:12px;color:#666;margin-bottom:12px">달성 조건으로 사용할 액티비티를 선택하세요. 복수 선택 가능합니다.</div>
       <table class="main-table" style="font-size:12px;">
-        <thead><tr><th style="width:32px"><input type="checkbox" id="chk-all-act" onchange="toggleAllActivities(this)"></th><th>구분</th><th>액티비티명</th><th>필터 여부</th></tr></thead>
+        <thead><tr><th style="width:32px"><input type="checkbox" id="chk-all-act" onchange="toggleAllActivities(this)"></th><th>구분</th><th>액티비티명</th></tr></thead>
         <tbody id="activity-list-body"></tbody>
       </table>
     </div>
@@ -2538,6 +2445,26 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
       <button class="mbtn mbtn-gray" onclick="document.getElementById('activity-select-modal').classList.remove('open')">취소</button>
       <button class="mbtn mbtn-blue" onclick="confirmActivitySelect()">조건 선택 완료</button>
     </div>
+
+<!-- 대상 선택 모달 -->
+<div class="am-modal-ov" id="target-select-modal">
+  <div class="am-modal" style="width:580px">
+    <div class="am-modal-header">
+      <span class="am-modal-title">대상 선택</span>
+      <button class="am-modal-close" onclick="document.getElementById('target-select-modal').classList.remove('open')">✕</button>
+    </div>
+    <div class="am-modal-body" style="padding:16px 20px;">
+      <div style="font-size:12px;color:#666;margin-bottom:12px">대상 구분 유형을 선택하세요.</div>
+      <table class="main-table" style="font-size:12px;">
+        <thead><tr><th>대상 구분 유형</th><th>대상 구분 설명</th><th style="width:70px">선택</th></tr></thead>
+        <tbody id="target-type-body"></tbody>
+      </table>
+    </div>
+    <div class="am-modal-footer">
+      <button class="mbtn mbtn-gray" onclick="document.getElementById('target-select-modal').classList.remove('open')">취소</button>
+    </div>
+  </div>
+</div>
   </div>
 </div>
 
@@ -2656,6 +2583,23 @@ const ACTIVITIES = [
   {cat:'학습',name:'마이크로러닝 수료',filter:true},
 ];
 
+// 필터가 필요한 액티비티 목록 및 필터 설명
+const FILTER_MAP = {
+  '공지사항 조회':             '공지사항 시퀀스 넘버',
+  '과정 학습홈 접속':           '프로덕트ID',
+  '과정 콘텐츠 학습 시작':       '프로덕트ID',
+  '마이크로러닝 학습 시작':       '프로덕트ID',
+  '과정 수료':                 '프로덕트ID',
+  '마이크로러닝 수료':           '프로덕트ID',
+  '쇼츠 시청':                 '프로덕트ID',
+  '쇼츠 시청 완료':             '프로덕트ID',
+  '쇼츠 댓글 작성':             '프로덕트ID',
+  '채널 접속':                 '채널ID',
+  '채널 내 게시글 작성':         '채널ID',
+  '채널 내 댓글/대댓글 작성':     '채널ID',
+  '채널 화상미팅 참여':          '채널ID',
+};
+
 function openActivitySelectModal() {
   const tbody = document.getElementById('activity-list-body');
   tbody.innerHTML = '';
@@ -2663,7 +2607,6 @@ function openActivitySelectModal() {
     tbody.innerHTML += `<tr>
       <td><input type="checkbox" class="act-chk" data-idx="${i}"></td>
       <td>${a.cat}</td><td>${a.name}</td>
-      <td style="color:${a.filter?'#1a73e8':'#bbb'}">${a.filter ? '필터 입력 필요' : '-'}</td>
     </tr>`;
   });
   document.getElementById('activity-select-modal').classList.add('open');
@@ -2678,15 +2621,55 @@ function confirmActivitySelect() {
   document.querySelectorAll('.act-chk:checked').forEach(cb => {
     selected.push(ACTIVITIES[parseInt(cb.dataset.idx)]);
   });
-  const container = document.getElementById('selected-activities');
+  const wrap = document.getElementById('selected-activities-wrap');
   if (selected.length === 0) {
-    container.innerHTML = '<span style="color:#bbb">액티비티를 선택해주세요.</span>';
+    wrap.innerHTML = '<span style="color:#bbb;font-size:12px">액티비티를 선택해주세요.</span>';
   } else {
-    container.innerHTML = selected.map(a =>
-      `<span class="activity-tag">${a.name}${a.filter ? ' <span style="font-size:10px;color:#e67e22">(필터↓)</span>' : ''}<span class="activity-tag-remove" onclick="this.parentElement.remove()">×</span></span>`
-    ).join('');
+    let rows = selected.map((a, idx) => {
+      const filterLabel = FILTER_MAP[a.name];
+      const filterCell = filterLabel
+        ? `<input class="act-filter-input" placeholder="${filterLabel} 입력" type="text">`
+        : `<span class="act-filter-none">-</span>`;
+      return `<tr id="act-row-${idx}">
+        <td>${a.name}</td>
+        <td>${filterCell}</td>
+        <td><button class="act-cond-del" onclick="this.closest('tr').remove()">X</button></td>
+      </tr>`;
+    }).join('');
+    wrap.innerHTML = `<table class="act-cond-table">
+      <thead><tr><th>액티비티명</th><th>(필요시) 필터 입력</th><th>조건 제외</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
   }
   document.getElementById('activity-select-modal').classList.remove('open');
+}
+
+// ── 대상 선택 모달 ──
+const TARGET_TYPES = [
+  { type: '회사',   desc: '특정 회사/사업부 단위로 대상을 지정합니다.' },
+  { type: '직급',   desc: '특정 직급(직책) 단위로 대상을 지정합니다.' },
+  { type: '부서',   desc: '특정 부서/조직 단위로 대상을 지정합니다.' },
+  { type: '개인',   desc: '개인 단위로 대상을 직접 지정합니다.' },
+];
+
+function openTargetSelectModal() {
+  const tbody = document.getElementById('target-type-body');
+  tbody.innerHTML = '';
+  TARGET_TYPES.forEach(t => {
+    tbody.innerHTML += `<tr>
+      <td style="font-weight:600">${t.type}</td>
+      <td style="color:#555">${t.desc}</td>
+      <td><button class="mbtn mbtn-outline" onclick="selectTargetType('${t.type}')">선택</button></td>
+    </tr>`;
+  });
+  document.getElementById('target-select-modal').classList.add('open');
+}
+
+function selectTargetType(type) {
+  document.getElementById('target-select-modal').classList.remove('open');
+  const el = document.getElementById('selected-target-text');
+  el.textContent = type + ' (으)로 지정됨';
+  el.style.display = 'inline';
 }
 </script>
 
