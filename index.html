@@ -2445,9 +2445,11 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
       <button class="mbtn mbtn-gray" onclick="document.getElementById('activity-select-modal').classList.remove('open')">취소</button>
       <button class="mbtn mbtn-blue" onclick="confirmActivitySelect()">조건 선택 완료</button>
     </div>
+  </div>
+</div>
 
 <!-- 대상 선택 모달 -->
-<div class="am-modal-ov" id="target-select-modal">
+<div class="am-modal-ov" id="target-select-modal" style="z-index:950">
   <div class="am-modal" style="width:580px">
     <div class="am-modal-header">
       <span class="am-modal-title">대상 선택</span>
@@ -2463,8 +2465,6 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
     <div class="am-modal-footer">
       <button class="mbtn mbtn-gray" onclick="document.getElementById('target-select-modal').classList.remove('open')">취소</button>
     </div>
-  </div>
-</div>
   </div>
 </div>
 
