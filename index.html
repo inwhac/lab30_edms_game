@@ -2384,8 +2384,8 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
         <label class="form-label">대상자 설정</label>
         <div class="target-option-row">
           <label class="radio-opt"><input type="radio" name="target" value="all" checked onchange="toggleTargetSelect(false)"> 전체 임직원</label>
-          <label class="radio-opt"><input type="radio" name="target" value="select" onchange="toggleTargetSelect(true)"> 대상 지정하기</label>
-          <button class="mbtn mbtn-gray" id="btn-select-target" style="display:none" onclick="openTargetSelectModal()">대상 선택</button>
+          <label class="radio-opt"><input type="radio" name="target" value="select" onchange="toggleTargetSelect(true)"> 대상구분 선택</label>
+          <button class="mbtn mbtn-gray" id="btn-select-target" style="display:none" onclick="openTargetSelectModal()">대상구분 선택</button>
           <span id="selected-target-text" style="font-size:12px;color:var(--primary);display:none"></span>
         </div>
       </div>
@@ -2448,14 +2448,39 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
   </div>
 </div>
 
-<!-- 대상 선택 모달 -->
+<!-- ──────────────────────────────────────────────────────────────────────────
+  [DEV NOTE] 대상구분 선택 모달 — 독립 모듈 호출
+  ─────────────────────────────────────────────────────────────────────────────
+  ※ 이 모달은 "대상구분 모듈"을 인라인 모달(iframe / 컴포넌트 마운트) 방식으로
+     호출하는 화면입니다. 활동미션 페이지를 완전히 이탈하지 않습니다.
+
+  [호출 흐름]
+    활동미션 설정 폼
+      → "대상구분 선택" 버튼 클릭
+      → 대상구분 선택/등록 화면 (모달 오버레이, 활동미션 페이지 유지)
+      → 완료(선택 확인) 시 모달 닫힘 + 선택된 대상구분 값을 활동미션 폼에 반영
+
+  [구현 가이드]
+    · 대상구분 모듈은 독립적으로 존재하며, 타 서비스에서도 동일하게 호출됩니다.
+    · 모달 내부는 대상구분 모듈 컴포넌트(또는 iframe src)로 렌더링합니다.
+    · 완료 이벤트(postMessage / callback)를 수신하여 선택값을 부모 폼에 반영하세요.
+    · 모달 닫기(✕ / 취소)는 값 반영 없이 모달만 닫습니다.
+──────────────────────────────────────────────────────────────────────────── -->
 <div class="am-modal-ov" id="target-select-modal" style="z-index:950">
   <div class="am-modal" style="width:580px">
     <div class="am-modal-header">
-      <span class="am-modal-title">대상 선택</span>
+      <span class="am-modal-title">대상구분 선택</span>
       <button class="am-modal-close" onclick="document.getElementById('target-select-modal').classList.remove('open')">✕</button>
     </div>
+    <!-- [DEV] 아래 영역이 대상구분 모듈 렌더링 영역입니다. 모듈 컴포넌트 또는 iframe으로 교체하세요. -->
     <div class="am-modal-body" style="padding:16px 20px;">
+      <!-- [DEV] 개발자 안내 배너 (실제 구현 시 제거 가능) -->
+      <div style="background:#fff8e1;border:1px solid #ffe082;border-radius:4px;padding:10px 14px;margin-bottom:14px;font-size:11.5px;line-height:1.7;color:#795548;">
+        <strong style="color:#e65100;">📌 [개발 안내] 대상구분 독립 모듈 호출 영역</strong><br>
+        이 모달은 활동미션 페이지를 이탈하지 않고 <strong>대상구분 모듈</strong>을 인라인으로 호출합니다.<br>
+        완료 시 선택된 대상구분 값이 활동미션 설정 폼으로 자동 반영됩니다.<br>
+        <span style="color:#888;">※ 타 서비스에서도 동일 모듈을 호출하는 구조입니다. 모듈 컴포넌트(또는 iframe)로 교체 후 이 안내 배너를 삭제하세요.</span>
+      </div>
       <div style="font-size:12px;color:#666;margin-bottom:12px">대상 구분 유형을 선택하세요.</div>
       <table class="main-table" style="font-size:12px;">
         <thead><tr><th>대상 구분 유형</th><th>대상 구분 설명</th><th style="width:70px">선택</th></tr></thead>
