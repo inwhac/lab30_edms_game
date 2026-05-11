@@ -1259,11 +1259,30 @@
   font-size: 22px; margin-bottom: 4px;
 }
 .btn-edit-char {
-  display: block; margin: 4px auto 0; height: 22px; padding: 0 8px;
+  display: inline-block; height: 22px; padding: 0 8px;
   font-size: 11px; background: #f5f5f5; border: 1px solid #ccc;
   border-radius: 2px; cursor: pointer; font-family: inherit; white-space: nowrap;
 }
 .btn-edit-char:hover { background: #e8f0fe; border-color: var(--primary); color: var(--primary); }
+.btn-reset-char {
+  display: inline-block; height: 22px; padding: 0 8px;
+  font-size: 11px; background: #fff5f5; border: 1px solid #f5c5c5;
+  border-radius: 2px; cursor: pointer; font-family: inherit; white-space: nowrap;
+  color: #c0392b; margin-left: 3px;
+}
+.btn-reset-char:hover { background: #ffeaea; border-color: #e53935; color: #e53935; }
+.char-btn-group { display: flex; justify-content: center; align-items: center; margin-top: 4px; gap: 3px; }
+.char-table-header-row {
+  display: flex; align-items: center; justify-content: flex-end;
+  margin-bottom: 6px;
+}
+.btn-reset-all-char {
+  height: 26px; padding: 0 12px; font-size: 11px;
+  background: #fff5f5; border: 1px solid #f5c5c5; border-radius: 3px;
+  cursor: pointer; font-family: inherit; white-space: nowrap;
+  color: #c0392b; display: inline-flex; align-items: center; gap: 4px;
+}
+.btn-reset-all-char:hover { background: #ffeaea; border-color: #e53935; color: #e53935; }
 
 /* 커스텀 미션 테이블 */
 .mission-status-badge {
@@ -1762,11 +1781,11 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
             <tbody>
               <tr><td>342</td><td>이*은</td><td>lee**@company.com</td><td>20230088</td><td>이화그룹</td><td>인사팀</td><td>배지 획득 미션</td><td>2026.04.23 13:55:04</td><td>기여자 배지 획득</td></tr>
               <tr><td>341</td><td>김*수</td><td>kim**@company.com</td><td>20240012</td><td>이화전자</td><td>기술연구소</td><td>메인 미션</td><td>2026.04.23 14:32:11</td><td>학습 마스터 레벨 5</td></tr>
-              <tr><td>340</td><td>최*화</td><td>choi**@company.com</td><td>20200031</td><td>㈜이화</td><td>기획팀</td><td>오늘의 미션</td><td>2026.04.23 12:18:49</td><td>총 30XP 획득</td></tr>
+              <tr><td>340</td><td>최*화</td><td>choi**@company.com</td><td>20200031</td><td>㈜이화</td><td>기획팀</td><td>배지 획득 미션</td><td>2026.04.23 12:18:49</td><td>효율가 배지 획득</td></tr>
               <tr><td>339</td><td>정*혁</td><td>jung**@company.com</td><td>20220077</td><td>이화그룹</td><td>개발팀</td><td>메인 미션</td><td>2026.04.23 11:54:30</td><td>레벨 3</td></tr>
               <tr><td>338</td><td>홍*연</td><td>hong**@company.com</td><td>20190042</td><td>이화전자</td><td>영업팀</td><td>온보딩 미션</td><td>2026.04.23 11:22:08</td><td>여정의 시작 배지 획득</td></tr>
               <tr><td>337</td><td>박*라</td><td>park**@company.com</td><td>20210055</td><td>㈜이화</td><td>마케팅팀</td><td>배지 획득 미션</td><td>2026.04.22 17:10:33</td><td>탐색자 배지 획득</td></tr>
-              <tr><td>336</td><td>신*언</td><td>shin**@company.com</td><td>20200053</td><td>㈜이화</td><td>전략기획팀</td><td>오늘의 미션</td><td>2026.04.22 15:12:44</td><td>총 30XP 획득</td></tr>
+              <tr><td>336</td><td>신*언</td><td>shin**@company.com</td><td>20200053</td><td>㈜이화</td><td>전략기획팀</td><td>메인 미션</td><td>2026.04.22 15:12:44</td><td>꾸준 실천가 레벨 2</td></tr>
             </tbody>
           </table>
           <div class="table-footer">
@@ -1957,6 +1976,9 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
 
               <!-- 7종 테이블 -->
               <div id="char-table-7" style="overflow-x:auto;">
+                <div class="char-table-header-row">
+                  <button class="btn-reset-all-char" onclick="resetAllCharImages()">↩ 전체 초기화</button>
+                </div>
                 <table class="char-table">
                   <thead>
                     <tr>
@@ -1971,6 +1993,9 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
 
               <!-- 단일 테이블 -->
               <div id="char-table-1" style="display:none;">
+                <div class="char-table-header-row">
+                  <button class="btn-reset-all-char" onclick="resetAllCharImages()">↩ 전체 초기화</button>
+                </div>
                 <table class="char-table">
                   <thead><tr><th>레벨</th><th>단일 캐릭터</th></tr></thead>
                   <tbody id="char-tbody-1"></tbody>
@@ -2573,7 +2598,13 @@ function buildCharTable(maxLevel) {
   for (let lv = 1; lv <= maxLevel; lv++) {
     let row = `<tr><td style="font-weight:700;text-align:center">Lv.${lv}</td>`;
     for (let p = 0; p < 7; p++) {
-      row += `<td><div class="char-thumb">${CHAR_EMOJIS[p]}</div><button class="btn-edit-char" onclick="alert('이미지 업로드: Lv.${lv} ${PERSONAS[p]}')">수정하기</button></td>`;
+      row += `<td>
+        <div class="char-thumb" id="char-img-7-${lv}-${p}">${CHAR_EMOJIS[p]}</div>
+        <div class="char-btn-group">
+          <button class="btn-edit-char" onclick="alert('이미지 업로드: Lv.${lv} ${PERSONAS[p]}')">수정하기</button>
+          <button class="btn-reset-char" onclick="confirmResetChar(7, ${lv}, ${p})">초기화</button>
+        </div>
+      </td>`;
     }
     row += '</tr>';
     tbody7.innerHTML += row;
@@ -2581,8 +2612,43 @@ function buildCharTable(maxLevel) {
   const tbody1 = document.getElementById('char-tbody-1');
   tbody1.innerHTML = '';
   for (let lv = 1; lv <= maxLevel; lv++) {
-    tbody1.innerHTML += `<tr><td style="font-weight:700;text-align:center">Lv.${lv}</td><td><div class="char-thumb" style="margin:0 auto">⭐</div><button class="btn-edit-char" onclick="alert('이미지 업로드: Lv.${lv}')">수정하기</button></td></tr>`;
+    tbody1.innerHTML += `<tr>
+      <td style="font-weight:700;text-align:center">Lv.${lv}</td>
+      <td>
+        <div class="char-thumb" id="char-img-1-${lv}-0" style="margin:0 auto">⭐</div>
+        <div class="char-btn-group">
+          <button class="btn-edit-char" onclick="alert('이미지 업로드: Lv.${lv}')">수정하기</button>
+          <button class="btn-reset-char" onclick="confirmResetChar(1, ${lv}, 0)">초기화</button>
+        </div>
+      </td>
+    </tr>`;
   }
+}
+
+// ── 캐릭터 이미지 초기화 ──
+const CHAR_DEFAULTS_7 = ['🎓','💬','🔁','🧭','⚡','🌊','🤝'];
+const CHAR_DEFAULT_1  = '⭐';
+
+function confirmResetChar(kind, lv, p) {
+  const name = kind === 7 ? `Lv.${lv} ${PERSONAS[p]}` : `Lv.${lv} 단일 캐릭터`;
+  const ok = confirm(`해당 캐릭터 이미지를 기본 이미지로 바꾸시겠습니까?\n(${name})`);
+  if (!ok) return;
+  const el = document.getElementById(`char-img-${kind}-${lv}-${p}`);
+  if (el) el.textContent = kind === 7 ? CHAR_DEFAULTS_7[p] : CHAR_DEFAULT_1;
+}
+
+function resetAllCharImages() {
+  const ok = confirm('전체 캐릭터 이미지를 기본 이미지로 바꾸시겠습니까?');
+  if (!ok) return;
+  // 현재 표시 중인 테이블 기준으로 리셋
+  document.querySelectorAll('[id^="char-img-7-"]').forEach(el => {
+    const parts = el.id.split('-');
+    const p = parseInt(parts[parts.length - 1]);
+    el.textContent = CHAR_DEFAULTS_7[p];
+  });
+  document.querySelectorAll('[id^="char-img-1-"]').forEach(el => {
+    el.textContent = CHAR_DEFAULT_1;
+  });
 }
 
 function onMaxLevelChange(val) {
