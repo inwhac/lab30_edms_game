@@ -1742,7 +1742,7 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
         <div class="card" style="padding:14px 18px;">
           <div class="search-row">
             <span class="label">미션명</span>
-            <select class="select" style="min-width:180px"><option>전체</option><option>메인 미션</option><option>오늘의 미션</option><option>온보딩 미션</option><option>배지 획득 미션</option></select>
+            <select class="select" style="min-width:180px"><option>전체</option><option>메인 미션</option><option>온보딩 미션</option><option>배지 획득 미션</option><option>커스텀 미션1</option><option>커스텀 미션2</option></select>
             <span class="label-auto" style="margin-left:8px">미션 완료일</span>
             <div class="date-wrap"><input type="text" class="input-date" placeholder="2026.01.01" readonly><span class="cal-icon">📅</span></div>
             <span class="date-sep">~</span>
@@ -1804,7 +1804,7 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
         <div class="card" style="padding:14px 18px;">
           <div class="search-row">
             <span class="label">배지 구분</span>
-            <select class="select" id="badge-category" onchange="filterBadges()" style="min-width:150px"><option>전체</option><option>기타</option><option>학습 마스터</option><option>지식 공유자</option><option>꾸준 실천가</option><option>탐험가</option><option>효율 추구자</option><option>몰입형 학습자</option><option>멘토</option></select>
+            <select class="select" id="badge-category" onchange="filterBadges()" style="min-width:150px"><option>전체</option><option>온보딩</option><option>기타</option><option>학습 마스터</option><option>지식 공유자</option><option>꾸준 실천가</option><option>탐험가</option><option>효율 추구자</option><option>몰입형 학습자</option><option>멘토</option></select>
             <span class="label-auto" style="margin-left:8px">배지명</span>
             <select class="select" id="badge-name" style="min-width:140px"><option>전체</option></select>
             <span class="label-auto" style="margin-left:8px">배지 획득일</span>
@@ -2018,6 +2018,11 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
             </div>
           </div>
 
+          <!-- ①~⑥ 일괄 저장 -->
+          <div style="display:flex;justify-content:flex-end;padding:4px 0 16px;">
+            <button class="btn btn-primary" style="height:34px;font-size:13px;padding:0 28px;" onclick="alert('저장되었습니다.')">저장</button>
+          </div>
+
           <!-- 8. 커스텀 미션 제작 -->
           <div class="setting-block">
             <div class="setting-block-header">⑦ 커스텀 미션 제작</div>
@@ -2049,12 +2054,6 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
             </div>
           </div>
 
-          </div>
-
-          <!-- 최종 적용 버튼 -->
-          <div style="display:flex;justify-content:flex-end;gap:10px;padding:8px 0 4px;">
-            <button class="btn btn-reset" style="height:34px;font-size:13px;padding:0 24px;">임시 저장</button>
-            <button class="btn btn-primary" style="height:34px;font-size:13px;padding:0 28px;" onclick="if(confirm('설정을 최종 적용하시겠습니까?\n적용 후 연수원에 게이미피케이션 엔진이 연동됩니다.'))alert('최종 적용되었습니다.')">최종 적용</button>
           </div>
 
         </div>
@@ -2442,15 +2441,6 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
           <button class="mbtn mbtn-outline" onclick="openActivitySelectModal()" style="white-space:nowrap;height:32px">액티비티 추가</button>
         </div>
         <div class="form-hint">필터 입력이 필요한 액티비티는 선택 후 직접 입력할 수 있습니다.</div>
-      </div>
-      <div class="form-row">
-        <label class="form-label">대상자 설정</label>
-        <div class="target-option-row">
-          <label class="radio-opt"><input type="radio" name="target" value="all" checked onchange="toggleTargetSelect(false)"> 전체 임직원</label>
-          <label class="radio-opt"><input type="radio" name="target" value="select" onchange="toggleTargetSelect(true)"> 대상구분 선택</label>
-          <button class="mbtn mbtn-gray" id="btn-select-target" style="display:none" onclick="openTargetSelectModal()">대상구분 선택</button>
-          <span id="selected-target-text" style="font-size:12px;color:var(--primary);display:none"></span>
-        </div>
       </div>
       <div class="form-row">
         <label class="form-label">보상</label>
@@ -2845,7 +2835,7 @@ function filterActivities() {
 }
 
 /* ── 배지 구분별 배지명 필터 ── */
-const BADGES_MAP = {"학습 마스터": ["학습자", "숙련자", "전문가", "박사"], "지식 공유자": ["참여자", "기여자", "인플루언서", "커뮤니티 리더"], "꾸준 실천가": ["실천자", "지속자", "연속 달성자", "루틴 챔피언"], "탐험가": ["탐색자", "발견자", "확장자", "멀티 지식인"], "효율 추구자": ["수행자", "효율가", "전략가", "퍼포먼스 마스터"], "몰입형 학습자": ["집중자", "몰입자", "딥러너", "딥 마스터"], "멘토": ["조력자", "가이드", "멘토", "최고의 멘토"], "기타": ["커스텀 배지1", "커스텀 배지2", "커스텀 배지3", "커스텀 배지4"]};
+const BADGES_MAP = {"온보딩": ["여정의 시작"], "학습 마스터": ["학습자", "숙련자", "전문가", "박사"], "지식 공유자": ["참여자", "기여자", "인플루언서", "커뮤니티 리더"], "꾸준 실천가": ["실천자", "지속자", "연속 달성자", "루틴 챔피언"], "탐험가": ["탐색자", "발견자", "확장자", "멀티 지식인"], "효율 추구자": ["수행자", "효율가", "전략가", "퍼포먼스 마스터"], "몰입형 학습자": ["집중자", "몰입자", "딥러너", "딥 마스터"], "멘토": ["조력자", "가이드", "멘토", "최고의 멘토"], "기타": ["커스텀 배지1", "커스텀 배지2", "커스텀 배지3", "커스텀 배지4"]};
 function filterBadges() {
   const cat = document.getElementById('badge-category') && document.getElementById('badge-category').value;
   const sel = document.getElementById('badge-name');
