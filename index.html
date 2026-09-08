@@ -1392,6 +1392,37 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
 }
 .info-modal-x:hover { background:rgba(255,255,255,0.35); }
 
+/* [2.3.0] 레벨업 조건 모달 (라이트 테마) */
+.lvlup-modal {
+  position:relative; width:440px; max-width:94vw; flex-shrink:0;
+  background:#fff; border-radius:16px; overflow:hidden;
+  box-shadow:0 24px 64px rgba(0,0,0,.4);
+}
+.lvlup-x {
+  position:absolute; top:12px; right:12px; z-index:10;
+  width:28px; height:28px; border-radius:50%;
+  background:rgba(0,0,0,0.06); border:none; cursor:pointer;
+  font-size:14px; color:#555; display:flex; align-items:center; justify-content:center;
+}
+.lvlup-x:hover { background:rgba(0,0,0,0.12); }
+.lvlup-head { padding:22px 24px 14px; border-bottom:1px solid #eef0f3; }
+.lvlup-head h2 { margin:0 0 6px; font-size:17px; color:#222; }
+.lvlup-head p { margin:0; font-size:12px; color:#777; line-height:1.5; }
+.lvlup-body { padding:16px 24px 24px; }
+.lvlup-table { width:100%; border-collapse:collapse; font-size:13px; }
+.lvlup-table th {
+  background:#f4f6f9; border:1px solid #e3e7ec; padding:9px 12px;
+  color:#444; font-weight:600; text-align:center;
+}
+.lvlup-table td {
+  border:1px solid #edf0f3; padding:9px 12px; color:#333; text-align:center;
+}
+.lvlup-table td:last-child { font-weight:600; }
+.lvlup-table tr:hover td { background:#f7f9ff; }
+.lvlup-table .lvlup-total td {
+  background:#f0eefe; color:#4a3fd6; font-weight:700; border-top:2px solid #d9d4fb;
+}
+
 /* ── 팝업 내부 공통 다크 테마 변수 ── */
   .pm1, .pm2, .pm3 {
     --pk-bg: #0f1117; --pk-surface: #1a1d27; --pk-surface2: #22263a; --pk-surface3: #2a2f45;
@@ -1481,6 +1512,65 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
   .act-cond-table th { background: #f0f2f5; border: 1px solid #dde1e7; padding: 6px 10px; font-weight: 600; color: #444; text-align: left; white-space: nowrap; }
   .act-cond-table td { border: 1px solid #e8eaed; padding: 6px 10px; color: #333; vertical-align: middle; }
   .act-cond-table tr:hover td { background: #f5f8ff; }
+
+  /* [2.3.0] 캐릭터 행 헤더 / 설명 툴팁 배지 */
+  .char-corner {
+    position:sticky; left:0; z-index:3;
+    background:#e9ecf3 !important;
+  }
+  .char-rowhead {
+    text-align:left !important; white-space:nowrap;
+    position:sticky; left:0; z-index:2;
+    background:#f7f8fb;
+  }
+  .char-rowhead-name { font-weight:700; color:#3a3f4b; font-size:12px; }
+  .char-info {
+    display:inline-flex; align-items:center; justify-content:center;
+    width:16px; height:16px; margin-left:6px; border-radius:50%;
+    background:linear-gradient(135deg,#8b83ff,#6c63ff); color:#fff;
+    font-size:10px; font-weight:800; font-style:italic;
+    cursor:help; vertical-align:middle;
+    box-shadow:0 2px 5px rgba(108,99,255,.35);
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .char-info:hover { transform:translateY(-1px) scale(1.12); box-shadow:0 4px 10px rgba(108,99,255,.5); }
+
+  /* [2.3.0] 캐릭터 설명 플로팅 툴팁 */
+  #char-tip {
+    position:fixed; z-index:5000; max-width:270px; pointer-events:none;
+    background:linear-gradient(150deg,#2c3048,#1b1e2c);
+    color:#eef0f6; font-size:12px; line-height:1.6;
+    padding:12px 14px; border-radius:12px;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 14px 36px rgba(20,22,40,.45);
+    opacity:0; transform:translateY(6px) scale(.98);
+    transition:opacity .16s ease, transform .16s ease;
+  }
+  #char-tip.show { opacity:1; transform:translateY(0) scale(1); }
+  #char-tip .tip-title {
+    display:flex; align-items:center; gap:7px;
+    font-weight:700; font-size:13px; color:#fff; margin-bottom:6px;
+  }
+  #char-tip .tip-title .tip-emoji { font-size:15px; }
+  #char-tip .tip-desc { color:#c3c8dd; }
+  #char-tip::after {
+    content:''; position:absolute; left:var(--arrow-left,22px);
+    width:11px; height:11px; transform:rotate(45deg);
+    background:#2c3048; border:1px solid rgba(255,255,255,.08);
+  }
+  #char-tip.below::after { top:-6px; border-right:none; border-bottom:none; }
+  #char-tip.above::after { bottom:-6px; border-left:none; border-top:none; background:#1b1e2c; }
+
+  /* [2.3.0] 필터 입력 도움말 아이콘 */
+  .filter-input-wrap { display:inline-flex; align-items:center; gap:5px; }
+  .filter-help {
+    display:inline-flex; align-items:center; justify-content:center;
+    width:16px; height:16px; border-radius:50%; flex-shrink:0;
+    background:#eaf0ff; color:#4a6cf7; font-size:11px; font-weight:800;
+    border:1px solid #d5e0ff; cursor:help;
+    transition:background .12s ease, color .12s ease, border-color .12s ease;
+  }
+  .filter-help:hover { background:#4a6cf7; color:#fff; border-color:#4a6cf7; }
   .act-cond-del { background: none; border: 1px solid #ccc; border-radius: 3px; padding: 2px 8px; font-size: 11px; cursor: pointer; color: #888; font-family: inherit; transition: all .15s; }
   .act-cond-del:hover { border-color: #e53935; color: #e53935; background: #fff5f5; }
   .act-filter-input { height: 24px; border: 1px solid #ccc; border-radius: 3px; padding: 0 7px; font-size: 11px; width: 140px; outline: none; }
@@ -1974,30 +2064,27 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
             <div class="setting-block-body">
               <div class="setting-notice" style="margin-bottom:10px">기본 제공된 캐릭터 이미지를 원하는 이미지 파일로 업로드하여 수정할 수 있습니다.</div>
 
-              <!-- 7종 테이블 -->
+              <!-- 7종 테이블 (행=캐릭터, 열=레벨) -->
               <div id="char-table-7" style="overflow-x:auto;">
                 <div class="char-table-header-row">
+                  <!-- [2.3.0] 레벨업 조건 확인 버튼 (전체 초기화 좌측) -->
+                  <button class="info-btn" onclick="openInfoModal('modal-levelup')">📊 레벨업 조건 확인</button>
                   <button class="btn-reset-all-char" onclick="resetAllCharImages()">↩ 전체 초기화</button>
                 </div>
                 <table class="char-table">
-                  <thead>
-                    <tr>
-                      <th>레벨</th>
-                      <th>🎓 학습 마스터</th><th>💬 지식 공유자</th><th>🔁 꾸준 실천가</th><th>🧭 탐험가</th>
-                      <th>⚡ 효율 추구자</th><th>🌊 몰입형 학습자</th><th>🤝 멘토</th>
-                    </tr>
-                  </thead>
+                  <thead><tr id="char-head-7"></tr></thead>
                   <tbody id="char-tbody-7"></tbody>
                 </table>
               </div>
 
-              <!-- 단일 테이블 -->
+              <!-- 단일 테이블 (행=캐릭터, 열=레벨) -->
               <div id="char-table-1" style="display:none;">
                 <div class="char-table-header-row">
+                  <button class="info-btn" onclick="openInfoModal('modal-levelup')">📊 레벨업 조건 확인</button>
                   <button class="btn-reset-all-char" onclick="resetAllCharImages()">↩ 전체 초기화</button>
                 </div>
                 <table class="char-table">
-                  <thead><tr><th>레벨</th><th>단일 캐릭터</th></tr></thead>
+                  <thead><tr id="char-head-1"></tr></thead>
                   <tbody id="char-tbody-1"></tbody>
                 </table>
               </div>
@@ -2374,6 +2461,34 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
   </div>
 </div>
 
+<!-- ════ [2.3.0] 레벨업 조건 확인 모달 ════ -->
+<div class="info-modal-ov" id="modal-levelup" onclick="if(event.target===this)closeInfoModal('modal-levelup')">
+  <div class="lvlup-modal">
+    <button class="lvlup-x" onclick="closeInfoModal('modal-levelup')">✕</button>
+    <div class="lvlup-head">
+      <h2>📊 레벨업 조건</h2>
+      <p>사용자가 [레벨업] 실행 시, 아래 값만큼 보유 경험치(XP)가 소진(차감)되어 레벨이 오릅니다.</p>
+    </div>
+    <div class="lvlup-body">
+      <table class="lvlup-table">
+        <thead><tr><th>레벨</th><th>레벨업 시 소진(차감) XP</th></tr></thead>
+        <tbody>
+          <tr><td>Lv.1 → 2</td><td>100</td></tr>
+          <tr><td>Lv.2 → 3</td><td>250</td></tr>
+          <tr><td>Lv.3 → 4</td><td>500</td></tr>
+          <tr><td>Lv.4 → 5</td><td>1,000</td></tr>
+          <tr><td>Lv.5 → 6</td><td>2,000</td></tr>
+          <tr><td>Lv.6 → 7</td><td>3,500</td></tr>
+          <tr><td>Lv.7 → 8</td><td>5,500</td></tr>
+          <tr><td>Lv.8 → 9</td><td>8,000</td></tr>
+          <tr><td>Lv.9 → 10</td><td>11,000</td></tr>
+          <tr class="lvlup-total"><td>총 합</td><td>31,850</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 <!-- ════ 커스텀 미션 모달 / 액티비티 선택 모달 ════ -->
 <!-- ════ 팝업 iframe 오버레이 ════ -->
 <div class="popup-iframe-ov" id="info-popup-ov">
@@ -2440,7 +2555,7 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
           </div>
           <button class="mbtn mbtn-outline" onclick="openActivitySelectModal()" style="white-space:nowrap;height:32px">액티비티 추가</button>
         </div>
-        <div class="form-hint">필터 입력이 필요한 액티비티는 선택 후 직접 입력할 수 있습니다.</div>
+        <div class="form-hint">필터 입력이 필요한 액티비티는 선택 후 직접 입력할 수 있습니다. 동일 액티비티도 필터를 달리하여 여러 번 추가할 수 있습니다.</div>
       </div>
       <div class="form-row">
         <label class="form-label">보상</label>
@@ -2488,7 +2603,7 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
       <button class="am-modal-close" onclick="document.getElementById('activity-select-modal').classList.remove('open')">✕</button>
     </div>
     <div class="am-modal-body" style="padding:16px 20px;">
-      <div style="font-size:12px;color:#666;margin-bottom:12px">달성 조건으로 사용할 액티비티를 선택하세요. 복수 선택 가능합니다.</div>
+      <div style="font-size:12px;color:#666;margin-bottom:12px">달성 조건으로 사용할 액티비티를 선택하세요. 복수 선택 가능하며, 선택 시 기존 조건에 추가됩니다. 동일 액티비티도 여러 번 추가할 수 있습니다.</div>
       <table class="main-table" style="font-size:12px;">
         <thead><tr><th style="width:32px"><input type="checkbox" id="chk-all-act" onchange="toggleAllActivities(this)"></th><th>구분</th><th>액티비티명</th></tr></thead>
         <tbody id="activity-list-body"></tbody>
@@ -2577,42 +2692,60 @@ function switchCharTable(kind) {
   document.getElementById('char-table-1').style.display = kind === '1' ? 'block' : 'none';
 }
 
-// ── 캐릭터 이미지 테이블 생성 ──
+// ── 캐릭터 이미지 테이블 생성 (행=캐릭터, 열=레벨) ──
 const PERSONAS = ['🎓 학습 마스터','💬 지식 공유자','🔁 꾸준 실천가','🧭 탐험가','⚡ 효율 추구자','🌊 몰입형 학습자','🤝 멘토'];
 const CHAR_EMOJIS = ['🎓','💬','🔁','🧭','⚡','🌊','🤝'];
+const PERSONA_NAMES = ['학습 마스터','지식 공유자','꾸준 실천가','탐험가','효율 추구자','몰입형 학습자','멘토'];
+const PERSONA_DESC = [
+  '학습을 시작하면 끝까지 완주하는 유형이에요. 과정 수료와 마이크로러닝 완료를 통해 경험치를 쌓고, 지식의 깊이와 전문성을 키우며 성장합니다.',
+  '읽고, 반응하고, 직접 글을 씁니다. 댓글과 게시글 작성, 이모지 반응 등 커뮤니티 활동을 통해 영향력을 키워가는 유형이에요.',
+  '매일 빠짐없이 접속하고 오늘의 미션을 꾸준히 완료하는 유형이에요. 작은 습관의 반복이 결국 가장 강한 학습자를 만들어냅니다.',
+  '다양한 콘텐츠를 검색하고 탐색하며 여러 분야에 관심을 가지는 유형이에요. 넓은 시야와 다양한 경험으로 복합적인 전문성을 쌓아갑니다.',
+  '짧고 효율적인 학습을 선호하는 유형이에요. 마이크로러닝과 쇼츠 영상을 통해 핵심만 빠르게 습득하며 최적화된 학습 경로를 만들어갑니다.',
+  '한번 시작하면 깊게 집중하는 유형이에요. 긴 학습 세션과 콘텐츠 완료 경험을 통해 완전한 이해와 깊은 몰입의 경험을 추구합니다.',
+  '나누고 함께 성장하는 유형이에요. 멘토 또는 사내전문가로서 게시글과 댓글을 통해 동료의 성장을 지원하며 커뮤니티의 중심이 됩니다.',
+];
+
+function charCellHtml(kind, lv, p, emoji, label) {
+  return `<div class="char-thumb" id="char-img-${kind}-${lv}-${p}">${emoji}</div>
+    <div class="char-btn-group">
+      <button class="btn-edit-char" onclick="alert('이미지 업로드: Lv.${lv} ${label}')">수정하기</button>
+      <button class="btn-reset-char" onclick="confirmResetChar(${kind}, ${lv}, ${p})">초기화</button>
+    </div>`;
+}
 
 function buildCharTable(maxLevel) {
   maxLevel = maxLevel || 10;
+
+  // ── 7종: 행=캐릭터, 열=레벨 ──
+  let head7 = '<th class="char-corner">캐릭터</th>';
+  for (let lv = 1; lv <= maxLevel; lv++) head7 += `<th>Lv.${lv}</th>`;
+  document.getElementById('char-head-7').innerHTML = head7;
+
   const tbody7 = document.getElementById('char-tbody-7');
   tbody7.innerHTML = '';
-  for (let lv = 1; lv <= maxLevel; lv++) {
-    let row = `<tr><td style="font-weight:700;text-align:center">Lv.${lv}</td>`;
-    for (let p = 0; p < 7; p++) {
-      row += `<td>
-        <div class="char-thumb" id="char-img-7-${lv}-${p}">${CHAR_EMOJIS[p]}</div>
-        <div class="char-btn-group">
-          <button class="btn-edit-char" onclick="alert('이미지 업로드: Lv.${lv} ${PERSONAS[p]}')">수정하기</button>
-          <button class="btn-reset-char" onclick="confirmResetChar(7, ${lv}, ${p})">초기화</button>
-        </div>
-      </td>`;
+  for (let p = 0; p < 7; p++) {
+    // [2.3.0] 캐릭터별 설명 툴팁 (ⓘ 호버 시 노출)
+    let row = `<td class="char-rowhead">
+      <span class="char-rowhead-name">${CHAR_EMOJIS[p]} ${PERSONA_NAMES[p]}</span>
+      <span class="char-info" data-name="${PERSONA_NAMES[p]}" data-emoji="${CHAR_EMOJIS[p]}" data-desc="${PERSONA_DESC[p]}">i</span>
+    </td>`;
+    for (let lv = 1; lv <= maxLevel; lv++) {
+      row += `<td>${charCellHtml(7, lv, p, CHAR_EMOJIS[p], PERSONA_NAMES[p])}</td>`;
     }
-    row += '</tr>';
-    tbody7.innerHTML += row;
+    tbody7.innerHTML += `<tr>${row}</tr>`;
   }
-  const tbody1 = document.getElementById('char-tbody-1');
-  tbody1.innerHTML = '';
+
+  // ── 단일: 행=캐릭터(1종), 열=레벨 ──
+  let head1 = '<th class="char-corner">캐릭터</th>';
+  for (let lv = 1; lv <= maxLevel; lv++) head1 += `<th>Lv.${lv}</th>`;
+  document.getElementById('char-head-1').innerHTML = head1;
+
+  let row1 = `<td class="char-rowhead"><span class="char-rowhead-name">⭐ 단일 캐릭터</span></td>`;
   for (let lv = 1; lv <= maxLevel; lv++) {
-    tbody1.innerHTML += `<tr>
-      <td style="font-weight:700;text-align:center">Lv.${lv}</td>
-      <td>
-        <div class="char-thumb" id="char-img-1-${lv}-0" style="margin:0 auto">⭐</div>
-        <div class="char-btn-group">
-          <button class="btn-edit-char" onclick="alert('이미지 업로드: Lv.${lv}')">수정하기</button>
-          <button class="btn-reset-char" onclick="confirmResetChar(1, ${lv}, 0)">초기화</button>
-        </div>
-      </td>
-    </tr>`;
+    row1 += `<td>${charCellHtml(1, lv, 0, '⭐', '단일 캐릭터')}</td>`;
   }
+  document.getElementById('char-tbody-1').innerHTML = `<tr>${row1}</tr>`;
 }
 
 // ── 캐릭터 이미지 초기화 ──
@@ -2645,6 +2778,54 @@ function onMaxLevelChange(val) {
   buildCharTable(parseInt(val));
 }
 buildCharTable();
+
+// [2.3.0] 캐릭터 설명 플로팅 툴팁 동작
+(function () {
+  const tip = document.createElement('div');
+  tip.id = 'char-tip';
+  tip.innerHTML = '<div class="tip-title"><span class="tip-emoji"></span><span class="tip-name"></span></div><div class="tip-desc"></div>';
+  document.body.appendChild(tip);
+  const emojiEl = tip.querySelector('.tip-emoji');
+  const nameEl = tip.querySelector('.tip-name');
+  const descEl = tip.querySelector('.tip-desc');
+
+  function position(badge) {
+    const r = badge.getBoundingClientRect();
+    const tw = tip.offsetWidth, th = tip.offsetHeight;
+    let left = r.left + r.width / 2 - 24;
+    left = Math.max(8, Math.min(left, window.innerWidth - tw - 8));
+    let top, below = true;
+    if (r.bottom + th + 12 <= window.innerHeight) {
+      top = r.bottom + 9;               // 아래에 표시
+    } else {
+      top = r.top - th - 9;             // 공간 없으면 위에 표시
+      below = false;
+    }
+    tip.classList.toggle('below', below);
+    tip.classList.toggle('above', !below);
+    const arrowLeft = Math.max(10, Math.min(r.left + r.width / 2 - left - 5, tw - 20));
+    tip.style.setProperty('--arrow-left', arrowLeft + 'px');
+    tip.style.left = left + 'px';
+    tip.style.top = top + 'px';
+  }
+
+  function show(badge) {
+    emojiEl.textContent = badge.dataset.emoji || '';
+    nameEl.textContent = badge.dataset.name || '';
+    descEl.textContent = badge.dataset.desc || '';
+    tip.classList.add('show');
+    position(badge);
+  }
+
+  document.addEventListener('mouseover', e => {
+    const b = e.target.closest ? e.target.closest('.char-info, .filter-help') : null;
+    if (b) show(b);
+  });
+  document.addEventListener('mouseout', e => {
+    const b = e.target.closest ? e.target.closest('.char-info, .filter-help') : null;
+    if (b) tip.classList.remove('show');
+  });
+})();
 
 // ── 팝업 iframe ──
 function openInfoPopup(title, src) {
@@ -2716,22 +2897,34 @@ const ACTIVITIES = [
   {cat:'학습',name:'마이크로러닝 수료',filter:true},
 ];
 
-// 필터가 필요한 액티비티 목록 및 필터 설명
+// 필터가 필요한 액티비티 목록 및 필터 설명 (2.3.0 관리자 기획안 기준)
+//  - 필드명 통일: 공지사항 아이디 / 과정아이디 / 채널 아이디
+//  - 키는 실제 액티비티명(ACTIVITIES)과 일치시킴
 const FILTER_MAP = {
-  '공지사항 조회':             '공지사항 시퀀스 넘버',
-  '과정 학습홈 접속':           '프로덕트ID',
-  '과정 콘텐츠 학습 시작':       '프로덕트ID',
-  '마이크로러닝 학습 시작':       '프로덕트ID',
-  '과정 수료':                 '프로덕트ID',
-  '마이크로러닝 수료':           '프로덕트ID',
-  '쇼츠 시청':                 '프로덕트ID',
-  '쇼츠 시청 완료':             '프로덕트ID',
-  '쇼츠 댓글 작성':             '프로덕트ID',
-  '채널 접속':                 '채널ID',
-  '채널 내 게시글 작성':         '채널ID',
-  '채널 내 댓글/대댓글 작성':     '채널ID',
-  '채널 화상미팅 참여':          '채널ID',
+  '공지사항 조회':             '공지사항 아이디',
+  '과정 학습홈 접속':           '과정아이디',
+  '과정 콘텐츠 학습 시작':       '과정아이디',
+  '마이크로러닝 학습 시작':       '과정아이디',
+  '과정 수료':                 '과정아이디',
+  '마이크로러닝 수료':           '과정아이디',
+  '채널 접속':                 '채널 아이디',
+  '채널 내 게시글 작성':         '채널 아이디',
+  '채널 내 댓글/대댓글 작성':     '채널 아이디',
+  '채널 내 화상 회의 참여':       '채널 아이디',
 };
+
+// [2.3.0] 필터 아이디 확인 방법 안내 (입력칸 옆 💡 도움말)
+const FILTER_HELP = {
+  '공지사항 아이디': '공지사항 상세 내용 조회 시 링크 가장 마지막 숫자를 의미합니다.',
+  '과정아이디': "new EDMS > 과정 및 카테고리 > 전체 과정에서 '과정아이디'를 확인할 수 있습니다.",
+  '채널 아이디': '채널 상세 정보 조회 시 링크에 있는 영문 대문자 + 숫자 조합의 14자리를 의미합니다.',
+};
+
+// [2.3.0] 동일 액티비티 중복 추가 허용
+//  - '조건 선택 완료' 시 기존 조건에 "추가(append)"하는 방식 (덮어쓰지 않음)
+//  - 같은 액티비티를 여러 번 추가 가능 (예: 마이크로러닝 수료-과정123 / 마이크로러닝 수료-과정456)
+//  - 각 조건 행은 독립적으로 필터 입력·삭제되며, 이미 입력한 필터 값은 재추가 시에도 보존됨
+let condRowSeq = 0;
 
 function openActivitySelectModal() {
   const tbody = document.getElementById('activity-list-body');
@@ -2742,6 +2935,8 @@ function openActivitySelectModal() {
       <td>${a.cat}</td><td>${a.name}</td>
     </tr>`;
   });
+  const master = document.getElementById('chk-all-act');
+  if (master) master.checked = false;
   document.getElementById('activity-select-modal').classList.add('open');
 }
 
@@ -2749,32 +2944,61 @@ function toggleAllActivities(masterCb) {
   document.querySelectorAll('.act-chk').forEach(cb => cb.checked = masterCb.checked);
 }
 
-function confirmActivitySelect() {
-  const selected = [];
-  document.querySelectorAll('.act-chk:checked').forEach(cb => {
-    selected.push(ACTIVITIES[parseInt(cb.dataset.idx)]);
-  });
+// 조건 테이블(tbody)이 없으면 생성해서 반환 (있으면 그대로 반환 → 기존 행 보존)
+function ensureCondTable() {
   const wrap = document.getElementById('selected-activities-wrap');
-  if (selected.length === 0) {
-    wrap.innerHTML = '<span style="color:#bbb;font-size:12px">액티비티를 선택해주세요.</span>';
-  } else {
-    let rows = selected.map((a, idx) => {
-      const filterLabel = FILTER_MAP[a.name];
-      const filterCell = filterLabel
-        ? `<input class="act-filter-input" placeholder="${filterLabel} 입력" type="text">`
-        : `<span class="act-filter-none">-</span>`;
-      return `<tr id="act-row-${idx}">
-        <td>${a.name}</td>
-        <td>${filterCell}</td>
-        <td><button class="act-cond-del" onclick="this.closest('tr').remove()">X</button></td>
-      </tr>`;
-    }).join('');
+  let tbody = document.getElementById('cond-tbody');
+  if (!tbody) {
     wrap.innerHTML = `<table class="act-cond-table">
       <thead><tr><th>액티비티명</th><th>(필요시) 필터 입력</th><th>조건 제외</th></tr></thead>
-      <tbody>${rows}</tbody>
+      <tbody id="cond-tbody"></tbody>
     </table>`;
+    tbody = document.getElementById('cond-tbody');
   }
+  return tbody;
+}
+
+function confirmActivitySelect() {
+  const checked = document.querySelectorAll('.act-chk:checked');
+  if (checked.length === 0) {
+    document.getElementById('activity-select-modal').classList.remove('open');
+    return;
+  }
+  const tbody = ensureCondTable();
+  checked.forEach(cb => {
+    const a = ACTIVITIES[parseInt(cb.dataset.idx)];
+    const filterLabel = FILTER_MAP[a.name];
+    let filterCell;
+    if (filterLabel) {
+      const help = FILTER_HELP[filterLabel];
+      const helpIcon = help
+        ? `<span class="filter-help" data-emoji="💡" data-name="${filterLabel} 확인 방법" data-desc="${help}">?</span>`
+        : '';
+      filterCell = `<span class="filter-input-wrap">
+        <input class="act-filter-input" placeholder="${filterLabel} 입력" type="text">${helpIcon}
+      </span>`;
+    } else {
+      filterCell = `<span class="act-filter-none">-</span>`;
+    }
+    const id = 'cond-row-' + (condRowSeq++);
+    const tr = document.createElement('tr');
+    tr.id = id;
+    tr.innerHTML = `<td>${a.name}</td>
+      <td>${filterCell}</td>
+      <td><button class="act-cond-del" onclick="removeCondRow('${id}')">X</button></td>`;
+    tbody.appendChild(tr);
+  });
   document.getElementById('activity-select-modal').classList.remove('open');
+}
+
+function removeCondRow(id) {
+  const tr = document.getElementById(id);
+  if (tr) tr.remove();
+  const tbody = document.getElementById('cond-tbody');
+  if (tbody && tbody.children.length === 0) {
+    document.getElementById('selected-activities-wrap').innerHTML =
+      '<span style="color:#bbb;font-size:12px">액티비티를 선택해주세요.</span>';
+  }
 }
 
 // ── 대상 선택 모달 ──
