@@ -1571,6 +1571,13 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
     transition:background .12s ease, color .12s ease, border-color .12s ease;
   }
   .filter-help:hover { background:#4a6cf7; color:#fff; border-color:#4a6cf7; }
+
+  /* [2.3.0] 중복 조합 조건 행 하이라이트 */
+  .act-cond-table tr.cond-dup td {
+    background:#fff0f0 !important;
+    box-shadow:inset 0 0 0 1px #f2b8b8;
+    transition:background .2s ease;
+  }
   .act-cond-del { background: none; border: 1px solid #ccc; border-radius: 3px; padding: 2px 8px; font-size: 11px; cursor: pointer; color: #888; font-family: inherit; transition: all .15s; }
   .act-cond-del:hover { border-color: #e53935; color: #e53935; background: #fff5f5; }
   .act-filter-input { height: 24px; border: 1px solid #ccc; border-radius: 3px; padding: 0 7px; font-size: 11px; width: 140px; outline: none; }
@@ -2015,6 +2022,10 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
                   <span style="font-size:12px;color:#888">단계 (최소 2 / 최대 10)</span>
                 </div>
               </div>
+              <!-- [2.3.0] 레벨업 조건 확인 버튼 (레벨 Max 설정 하위로 이동) -->
+              <div style="margin-top:10px">
+                <button class="info-btn" onclick="openInfoModal('modal-levelup')">📊 레벨업 조건 확인</button>
+              </div>
             </div>
           </div>
 
@@ -2067,8 +2078,6 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
               <!-- 7종 테이블 (행=캐릭터, 열=레벨) -->
               <div id="char-table-7" style="overflow-x:auto;">
                 <div class="char-table-header-row">
-                  <!-- [2.3.0] 레벨업 조건 확인 버튼 (전체 초기화 좌측) -->
-                  <button class="info-btn" onclick="openInfoModal('modal-levelup')">📊 레벨업 조건 확인</button>
                   <button class="btn-reset-all-char" onclick="resetAllCharImages()">↩ 전체 초기화</button>
                 </div>
                 <table class="char-table">
@@ -2080,7 +2089,6 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
               <!-- 단일 테이블 (행=캐릭터, 열=레벨) -->
               <div id="char-table-1" style="display:none;">
                 <div class="char-table-header-row">
-                  <button class="info-btn" onclick="openInfoModal('modal-levelup')">📊 레벨업 조건 확인</button>
                   <button class="btn-reset-all-char" onclick="resetAllCharImages()">↩ 전체 초기화</button>
                 </div>
                 <table class="char-table">
@@ -2590,7 +2598,7 @@ iframe.popup-frame { flex: 1; border: none; width: 100%; }
     </div>
     <div class="am-modal-footer">
       <button class="mbtn mbtn-gray" onclick="closeCustomMissionModal()">취소</button>
-      <button class="mbtn mbtn-blue" onclick="alert('저장되었습니다.');closeCustomMissionModal()">저장</button>
+      <button class="mbtn mbtn-blue" onclick="saveCustomMission()">저장</button>
     </div>
   </div>
 </div>
@@ -2999,6 +3007,40 @@ function removeCondRow(id) {
     document.getElementById('selected-activities-wrap').innerHTML =
       '<span style="color:#bbb;font-size:12px">액티비티를 선택해주세요.</span>';
   }
+}
+
+// [2.3.0] 커스텀 미션 저장 — 동일 미션 + 동일 액티비티 + 동일 필터 조합 중복 검증
+//  - 판별 기준: [액티비티명 | 필터값] (동일 미션 내이므로 미션ID는 고정)
+//  - 동일 액티비티라도 필터값이 다르면 허용, 필터값(또는 무필터)이 같으면 중복으로 차단
+function saveCustomMission() {
+  const tbody = document.getElementById('cond-tbody');
+  const rows = tbody ? Array.from(tbody.children) : [];
+
+  const seen = new Map();
+  for (const tr of rows) {
+    const name = tr.children[0].textContent.trim();
+    const input = tr.querySelector('.act-filter-input');
+    const filterVal = input ? input.value.trim() : '';
+    const key = name + ' || ' + filterVal;
+    if (seen.has(key)) {
+      highlightDupRows(seen.get(key), tr);
+      if (input) input.focus();
+      alert('중복되는 액티비티+필터 조합이 존재합니다. 필터에 입력한 아이디를 다시 확인해주세요.');
+      return; // 저장 중단
+    }
+    seen.set(key, tr);
+  }
+
+  alert('저장되었습니다.');
+  closeCustomMissionModal();
+}
+
+function highlightDupRows(rowA, rowB) {
+  [rowA, rowB].forEach(r => {
+    if (!r) return;
+    r.classList.add('cond-dup');
+    setTimeout(() => r.classList.remove('cond-dup'), 2200);
+  });
 }
 
 // ── 대상 선택 모달 ──
